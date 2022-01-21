@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { Component } from "react";
+import axios from "./axios";
 
-function App(props) {
-  const [name, setName] = useState("someone@email.com");
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: [] };
+  }
 
-  useEffect(() => {
+  async componentWillMount() {
     console.log("init()");
-  }, []);
+    try {
+      const { data } = await axios.get("users");
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  return (
-    <div className="container">
-      <h1>Welcome {name}</h1>
-      <input value={name} onChange={(e) => setName(e.target.value)}></input>
-    </div>
-  );
+  componentDidMount() {}
+
+  render() {
+    return <div></div>;
+  }
 }
 
 export default App;
