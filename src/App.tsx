@@ -1,17 +1,21 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Container } from 'react-bootstrap';
+type AppProps = {
+  component?: string;
+};
 
-function App() {
-  return (
-    <>
-      <Container>
-        <h1 className='mb-2'>"react-bootstrap": "^2.5.0"</h1>
-        <h1>"bootstrap": "^5.2.2", </h1>
-        <Button>Primary Button</Button>
-      </Container>
-    </>
-  );
+export default function App({ component }: AppProps) {
+  function renderCompByName() {
+    if (component === "ImageSlider") {
+      return <ImageSlider />;
+    } else if (component === "Products") {
+      return <Products />;
+    }
+    return <PageNotFound />;
+  }
+
+  return <div className="container">{renderCompByName()}</div>;
 }
 
-export default App;
+const ImageSlider = () => <h1>Image Slider</h1>;
+const Products = () => <h1>Products Gallery</h1>;
+
+const PageNotFound = () => <></>;
